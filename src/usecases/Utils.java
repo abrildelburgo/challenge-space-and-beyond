@@ -1,5 +1,6 @@
-package useCases;
+package usecases;
 
+import java.time.Duration;
 import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -19,16 +20,16 @@ public class Utils {
 	}
 	
 	public static void wait (By locator, long timeOutInSeconds, WebDriver driver) {
-		WebDriverWait wait = new WebDriverWait(driver,timeOutInSeconds);
+		WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(timeOutInSeconds));
 		wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
 		wait.until(ExpectedConditions.elementToBeClickable(locator));
 	}
 	
-	public static void selectLi (By locator, By locator_2, int quantity, int index, WebDriver driver) {
-		driver.findElements(locator).get(0).click();
-		WebElement adult_list = driver.findElements(locator_2).get(index);
-		List<WebElement> adult_numbers = adult_list.findElements(By.tagName("li"));
-		adult_numbers.get(quantity).click();
+	public static void selectLi (By dropdownLocator, By dataListLocator, int quantity, int index, WebDriver driver) {
+		driver.findElements(dropdownLocator).get(0).click();
+		WebElement list = driver.findElements(dataListLocator).get(index);
+		List<WebElement> numbers = list.findElements(By.tagName("li"));
+		numbers.get(quantity).click();
 	}
 	
 }
